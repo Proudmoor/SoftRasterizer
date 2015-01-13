@@ -12,15 +12,16 @@
 
 #include <sstream>
 
-int * pixels = new int[640*480];
+Uint32 * pixels = new Uint32[640*480];
 void SetPixel(int x, int y) {
     // pixel easyliy out of range especially draw circle, so
     if(x > 640)  x = x -640;
     if(y > 480)  y = y -480;
     if (y < 0)   y = 480 - y;
     if (x < 0)   x = 640 - x;
-    
-    pixels[y * 640 + x] = 0;
+    //pixels[y * 640 + x] = 0xffff00ff;
+    Uint8 *colors = (Uint8*)&pixels;
+    pixels[y * 640 +x] = colors[0];
 }
 void DrawCirclePoint(int xc, int yc, int x, int y) {
     SetPixel(xc + x, yc + y);
@@ -108,16 +109,16 @@ int main(int argc, char** argv) {
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
     
     SDL_Texture *texture = SDL_CreateTexture(renderer,
-                                             SDL_PIXELFORMAT_ARGB8888,
+                                             SDL_PIXELFORMAT_RGBA8888,
                                              SDL_TEXTUREACCESS_STATIC,
                                              640,480);
     
-    memset(pixels, 255, 640 * 480 * sizeof(int));
+    memset(pixels, 255, 640 * 480 * sizeof(Uint32));
     
     
     bool ptCount = false; // whether have a point
     while (!quit) {
-        SDL_UpdateTexture(texture, NULL, pixels, 640*sizeof(int));
+        SDL_UpdateTexture(texture, NULL, pixels, 640*sizeof(Uint32));
         SDL_WaitEvent(&event);
         int x1, y1;
         int x2, y2;
