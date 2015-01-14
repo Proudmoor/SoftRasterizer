@@ -1,0 +1,367 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E24417EA1A660F2000EC71A5 /* DrawShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24417E31A660F2000EC71A5 /* DrawShape.cpp */; };
+		E24417EB1A660F2000EC71A5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24417E51A660F2000EC71A5 /* main.cpp */; };
+		E24417EC1A660F2000EC71A5 /* PixelAttri.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24417E61A660F2000EC71A5 /* PixelAttri.cpp */; };
+		E24417ED1A660F2000EC71A5 /* Rasterizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24417E81A660F2000EC71A5 /* Rasterizer.cpp */; };
+		E24417F01A660F3500EC71A5 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24417EE1A660F3500EC71A5 /* SDL2_image.framework */; };
+		E24417F11A660F3500EC71A5 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24417EF1A660F3500EC71A5 /* SDL2.framework */; };
+		E24417FF1A66105900EC71A5 /* mandelbrot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24417FE1A66105900EC71A5 /* mandelbrot.cpp */; };
+		E24418021A6610BF00EC71A5 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E24417EF1A660F3500EC71A5 /* SDL2.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E24417D71A660EE400EC71A5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		E24417F51A66102100EC71A5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		E24417D91A660EE400EC71A5 /* SoftRasterizer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SoftRasterizer; sourceTree = BUILT_PRODUCTS_DIR; };
+		E24417E31A660F2000EC71A5 /* DrawShape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DrawShape.cpp; sourceTree = SOURCE_ROOT; };
+		E24417E41A660F2000EC71A5 /* DrawShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawShape.h; sourceTree = SOURCE_ROOT; };
+		E24417E51A660F2000EC71A5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
+		E24417E61A660F2000EC71A5 /* PixelAttri.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PixelAttri.cpp; sourceTree = SOURCE_ROOT; };
+		E24417E71A660F2000EC71A5 /* PixelAttri.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PixelAttri.h; sourceTree = SOURCE_ROOT; };
+		E24417E81A660F2000EC71A5 /* Rasterizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rasterizer.cpp; sourceTree = SOURCE_ROOT; };
+		E24417E91A660F2000EC71A5 /* Rasterizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rasterizer.h; sourceTree = SOURCE_ROOT; };
+		E24417EE1A660F3500EC71A5 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
+		E24417EF1A660F3500EC71A5 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		E24417F71A66102100EC71A5 /* Mandelbrot */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Mandelbrot; sourceTree = BUILT_PRODUCTS_DIR; };
+		E24417FE1A66105900EC71A5 /* mandelbrot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mandelbrot.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E24417D61A660EE400EC71A5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E24417F01A660F3500EC71A5 /* SDL2_image.framework in Frameworks */,
+				E24417F11A660F3500EC71A5 /* SDL2.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E24417F41A66102100EC71A5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E24418021A6610BF00EC71A5 /* SDL2.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E24417D01A660EE400EC71A5 = {
+			isa = PBXGroup;
+			children = (
+				E24417F21A660FE600EC71A5 /* Mandelbrot */,
+				E24417EE1A660F3500EC71A5 /* SDL2_image.framework */,
+				E24417EF1A660F3500EC71A5 /* SDL2.framework */,
+				E24417DB1A660EE400EC71A5 /* SoftRasterizer */,
+				E24417DA1A660EE400EC71A5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E24417DA1A660EE400EC71A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E24417D91A660EE400EC71A5 /* SoftRasterizer */,
+				E24417F71A66102100EC71A5 /* Mandelbrot */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E24417DB1A660EE400EC71A5 /* SoftRasterizer */ = {
+			isa = PBXGroup;
+			children = (
+				E24417E31A660F2000EC71A5 /* DrawShape.cpp */,
+				E24417E41A660F2000EC71A5 /* DrawShape.h */,
+				E24417E51A660F2000EC71A5 /* main.cpp */,
+				E24417E61A660F2000EC71A5 /* PixelAttri.cpp */,
+				E24417E71A660F2000EC71A5 /* PixelAttri.h */,
+				E24417E81A660F2000EC71A5 /* Rasterizer.cpp */,
+				E24417E91A660F2000EC71A5 /* Rasterizer.h */,
+			);
+			path = SoftRasterizer;
+			sourceTree = "<group>";
+		};
+		E24417F21A660FE600EC71A5 /* Mandelbrot */ = {
+			isa = PBXGroup;
+			children = (
+				E24417FE1A66105900EC71A5 /* mandelbrot.cpp */,
+			);
+			name = Mandelbrot;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E24417D81A660EE400EC71A5 /* SoftRasterizer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E24417E01A660EE400EC71A5 /* Build configuration list for PBXNativeTarget "SoftRasterizer" */;
+			buildPhases = (
+				E24417D51A660EE400EC71A5 /* Sources */,
+				E24417D61A660EE400EC71A5 /* Frameworks */,
+				E24417D71A660EE400EC71A5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SoftRasterizer;
+			productName = SoftRasterizer;
+			productReference = E24417D91A660EE400EC71A5 /* SoftRasterizer */;
+			productType = "com.apple.product-type.tool";
+		};
+		E24417F61A66102100EC71A5 /* Mandelbrot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E24417FB1A66102100EC71A5 /* Build configuration list for PBXNativeTarget "Mandelbrot" */;
+			buildPhases = (
+				E24417F31A66102100EC71A5 /* Sources */,
+				E24417F41A66102100EC71A5 /* Frameworks */,
+				E24417F51A66102100EC71A5 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Mandelbrot;
+			productName = Mandelbrot;
+			productReference = E24417F71A66102100EC71A5 /* Mandelbrot */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E24417D11A660EE400EC71A5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = zpf;
+				TargetAttributes = {
+					E24417D81A660EE400EC71A5 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					E24417F61A66102100EC71A5 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = E24417D41A660EE400EC71A5 /* Build configuration list for PBXProject "SoftRasterizer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E24417D01A660EE400EC71A5;
+			productRefGroup = E24417DA1A660EE400EC71A5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E24417D81A660EE400EC71A5 /* SoftRasterizer */,
+				E24417F61A66102100EC71A5 /* Mandelbrot */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E24417D51A660EE400EC71A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E24417EC1A660F2000EC71A5 /* PixelAttri.cpp in Sources */,
+				E24417EB1A660F2000EC71A5 /* main.cpp in Sources */,
+				E24417ED1A660F2000EC71A5 /* Rasterizer.cpp in Sources */,
+				E24417EA1A660F2000EC71A5 /* DrawShape.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E24417F31A66102100EC71A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E24417FF1A66105900EC71A5 /* mandelbrot.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		E24417DE1A660EE400EC71A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E24417DF1A660EE400EC71A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E24417E11A660EE400EC71A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E24417E21A660EE400EC71A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		E24417FC1A66102100EC71A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E24417FD1A66102100EC71A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E24417D41A660EE400EC71A5 /* Build configuration list for PBXProject "SoftRasterizer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E24417DE1A660EE400EC71A5 /* Debug */,
+				E24417DF1A660EE400EC71A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E24417E01A660EE400EC71A5 /* Build configuration list for PBXNativeTarget "SoftRasterizer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E24417E11A660EE400EC71A5 /* Debug */,
+				E24417E21A660EE400EC71A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E24417FB1A66102100EC71A5 /* Build configuration list for PBXNativeTarget "Mandelbrot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E24417FC1A66102100EC71A5 /* Debug */,
+				E24417FD1A66102100EC71A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E24417D11A660EE400EC71A5 /* Project object */;
+}

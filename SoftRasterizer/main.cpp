@@ -19,9 +19,9 @@ void SetPixel(int x, int y) {
     if(y > 480)  y = y -480;
     if (y < 0)   y = 480 - y;
     if (x < 0)   x = 640 - x;
-    //pixels[y * 640 + x] = 0xffff00ff;
-    Uint8 *colors = (Uint8*)&pixels;
-    pixels[y * 640 +x] = colors[0];
+    pixels[y * 640 + x] = 0xff0000ff;
+//    Uint8 *colors = (Uint8*)&pixels;
+//    pixels[y * 640 +x] = colors[0];
 }
 void DrawCirclePoint(int xc, int yc, int x, int y) {
     SetPixel(xc + x, yc + y);
