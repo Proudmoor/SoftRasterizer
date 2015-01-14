@@ -112,7 +112,7 @@ int main(int argc, char** argv) {
                                              SDL_PIXELFORMAT_RGBA8888,
                                              SDL_TEXTUREACCESS_STATIC,
                                              640,480);
-    
+    //initialize memory to ....uint8
     memset(pixels, 255, 640 * 480 * sizeof(Uint32));
     
     
