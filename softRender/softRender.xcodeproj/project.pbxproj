@@ -10,6 +10,7 @@
 		E24418571A66B2BA00EC71A5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24418561A66B2BA00EC71A5 /* main.cpp */; };
 		E244185F1A66B2DE00EC71A5 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185D1A66B2DE00EC71A5 /* SDL2_image.framework */; };
 		E24418601A66B2DE00EC71A5 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185E1A66B2DE00EC71A5 /* SDL2.framework */; };
+		E281A4D61A67EB7C008336CF /* Pixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E281A4D41A67EB7C008336CF /* Pixels.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,7 +30,8 @@
 		E24418561A66B2BA00EC71A5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E244185D1A66B2DE00EC71A5 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		E244185E1A66B2DE00EC71A5 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
-		E2A32EEC1A66C3720090F5EB /* softRast.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = softRast.xcodeproj; path = softRender/softRast/softRast.xcodeproj; sourceTree = "<group>"; };
+		E281A4D41A67EB7C008336CF /* Pixels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pixels.cpp; sourceTree = "<group>"; };
+		E281A4D51A67EB7C008336CF /* Pixels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pixels.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +54,6 @@
 				E244185E1A66B2DE00EC71A5 /* SDL2.framework */,
 				E24418551A66B2BA00EC71A5 /* softRender */,
 				E24418541A66B2BA00EC71A5 /* Products */,
-				E2A32EEC1A66C3720090F5EB /* softRast.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,6 +69,8 @@
 			isa = PBXGroup;
 			children = (
 				E24418561A66B2BA00EC71A5 /* main.cpp */,
+				E281A4D41A67EB7C008336CF /* Pixels.cpp */,
+				E281A4D51A67EB7C008336CF /* Pixels.h */,
 			);
 			path = softRender;
 			sourceTree = "<group>";
@@ -128,6 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E281A4D61A67EB7C008336CF /* Pixels.cpp in Sources */,
 				E24418571A66B2BA00EC71A5 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
