@@ -11,6 +11,7 @@
 		E244185F1A66B2DE00EC71A5 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185D1A66B2DE00EC71A5 /* SDL2_image.framework */; };
 		E24418601A66B2DE00EC71A5 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185E1A66B2DE00EC71A5 /* SDL2.framework */; };
 		E281A4D61A67EB7C008336CF /* Pixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E281A4D41A67EB7C008336CF /* Pixels.cpp */; };
+		E281A4D81A67F814008336CF /* drawline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E281A4D71A67F814008336CF /* drawline.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +33,7 @@
 		E244185E1A66B2DE00EC71A5 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		E281A4D41A67EB7C008336CF /* Pixels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pixels.cpp; sourceTree = "<group>"; };
 		E281A4D51A67EB7C008336CF /* Pixels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pixels.h; sourceTree = "<group>"; };
+		E281A4D71A67F814008336CF /* drawline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = drawline.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				E24418561A66B2BA00EC71A5 /* main.cpp */,
 				E281A4D41A67EB7C008336CF /* Pixels.cpp */,
 				E281A4D51A67EB7C008336CF /* Pixels.h */,
+				E281A4D71A67F814008336CF /* drawline.cpp */,
 			);
 			path = softRender;
 			sourceTree = "<group>";
@@ -132,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E281A4D61A67EB7C008336CF /* Pixels.cpp in Sources */,
+				E281A4D81A67F814008336CF /* drawline.cpp in Sources */,
 				E24418571A66B2BA00EC71A5 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
