@@ -10,8 +10,9 @@
 		E24418571A66B2BA00EC71A5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24418561A66B2BA00EC71A5 /* main.cpp */; };
 		E244185F1A66B2DE00EC71A5 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185D1A66B2DE00EC71A5 /* SDL2_image.framework */; };
 		E24418601A66B2DE00EC71A5 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185E1A66B2DE00EC71A5 /* SDL2.framework */; };
-		E281A4D61A67EB7C008336CF /* Pixels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E281A4D41A67EB7C008336CF /* Pixels.cpp */; };
-		E281A4D81A67F814008336CF /* drawline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E281A4D71A67F814008336CF /* drawline.cpp */; };
+		E2F22E4F1A69003000DC8A1D /* Rasterizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F22E4D1A69003000DC8A1D /* Rasterizer.cpp */; };
+		E2F22E521A69003F00DC8A1D /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F22E501A69003F00DC8A1D /* Color.cpp */; };
+		E2F22E551A690CDF00DC8A1D /* Math.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F22E531A690CDF00DC8A1D /* Math.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,9 +32,12 @@
 		E24418561A66B2BA00EC71A5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E244185D1A66B2DE00EC71A5 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		E244185E1A66B2DE00EC71A5 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
-		E281A4D41A67EB7C008336CF /* Pixels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pixels.cpp; sourceTree = "<group>"; };
-		E281A4D51A67EB7C008336CF /* Pixels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pixels.h; sourceTree = "<group>"; };
-		E281A4D71A67F814008336CF /* drawline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = drawline.cpp; sourceTree = "<group>"; };
+		E2F22E4D1A69003000DC8A1D /* Rasterizer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Rasterizer.cpp; sourceTree = "<group>"; };
+		E2F22E4E1A69003000DC8A1D /* Rasterizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rasterizer.h; sourceTree = "<group>"; };
+		E2F22E501A69003F00DC8A1D /* Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Color.cpp; sourceTree = "<group>"; };
+		E2F22E511A69003F00DC8A1D /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
+		E2F22E531A690CDF00DC8A1D /* Math.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Math.cpp; sourceTree = "<group>"; };
+		E2F22E541A690CDF00DC8A1D /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,9 +75,12 @@
 			isa = PBXGroup;
 			children = (
 				E24418561A66B2BA00EC71A5 /* main.cpp */,
-				E281A4D41A67EB7C008336CF /* Pixels.cpp */,
-				E281A4D51A67EB7C008336CF /* Pixels.h */,
-				E281A4D71A67F814008336CF /* drawline.cpp */,
+				E2F22E4D1A69003000DC8A1D /* Rasterizer.cpp */,
+				E2F22E4E1A69003000DC8A1D /* Rasterizer.h */,
+				E2F22E501A69003F00DC8A1D /* Color.cpp */,
+				E2F22E511A69003F00DC8A1D /* Color.h */,
+				E2F22E531A690CDF00DC8A1D /* Math.cpp */,
+				E2F22E541A690CDF00DC8A1D /* Math.h */,
 			);
 			path = softRender;
 			sourceTree = "<group>";
@@ -134,9 +141,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E281A4D61A67EB7C008336CF /* Pixels.cpp in Sources */,
-				E281A4D81A67F814008336CF /* drawline.cpp in Sources */,
+				E2F22E521A69003F00DC8A1D /* Color.cpp in Sources */,
+				E2F22E4F1A69003000DC8A1D /* Rasterizer.cpp in Sources */,
 				E24418571A66B2BA00EC71A5 /* main.cpp in Sources */,
+				E2F22E551A690CDF00DC8A1D /* Math.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
