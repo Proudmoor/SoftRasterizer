@@ -356,7 +356,7 @@ void Rasterizer::RasterizeLeftTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** c
             {
                 for (int x = ROUND(xs); x <= ROUND(xe); ++x)
                 {
-                    if ( zb != nullptr ) // zbufferÏûÒþ
+                    if ( zb != nullptr ) // zbuffer消隐
                     {
                         if ( zxi < zb[x][y] )
                         {
@@ -375,7 +375,7 @@ void Rasterizer::RasterizeLeftTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** c
             {
                 for (int x = ROUND(xs); x <= ROUND(xe); ++x)
                 {
-                    if ( zb != nullptr ) // zbufferÏûÒþ
+                    if ( zb != nullptr ) // zbuffer消隐
                     {
                         if ( zxi < zb[x][y] )
                         {
@@ -394,7 +394,7 @@ void Rasterizer::RasterizeLeftTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** c
         }
         else if (fm == FILL_WIREFRAME)
         {
-            if ( zb != nullptr ) // zbufferÏûÒþ
+            if ( zb != nullptr ) // zbuffer消隐
             {
                 if ( zxs < zb[ROUND(xs)][y] )
                 {
@@ -418,12 +418,12 @@ void Rasterizer::RasterizeLeftTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** c
         xe += dxy_right;
     }
     
-    // °´Æ½¶¥Èý½ÇÐÎ´¦Àí pp1p2
+    // Top Tri 平顶三角形 pp1p2
     //RasterizeTopTri(&p, p1, p2);
     xs = p.v.x;
     xe = p1->v.x;
     dxy_right = deltaYp1p2 * (p2->v.x - p1->v.x);
-    // »æÖÆÃ¿ÌõÉ¨ÃèÏß
+    // 绘制每条扫描线
     for (int y = ROUND(p1->v.y); y <= ROUND(p2->v.y); ++y)
     {
         t = deltaYp1p2 * (y - p.v.y);
@@ -437,14 +437,14 @@ void Rasterizer::RasterizeLeftTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** c
         
         Color deltac(0, 0, 0);
         if (!FloatEqual(xs, xe))
-            deltac = (cxe - cxs) / (xe - xs); // ÑÕÉ«ÑØÉ¨ÃèÏßµÄ±ä»¯ÂÊ
+            deltac = (cxe - cxs) / (xe - xs); // 颜色沿扫描线变化率
         Color cxi = cxs;
         
         float zxs = LERPf(p.v.z, p2->v.z, t);
         float zxe = LERPf(p1->v.z, p2->v.z, t);
         float deltaz = 0;
         if (!FloatEqual(xs, xe))
-            deltaz = (zxe - zxs) / (xe - xs); // Éî¶ÈÑØÉ¨ÃèÏßµÄ±ä»¯ÂÊ
+            deltaz = (zxe - zxs) / (xe - xs); // 深度沿扫描线变换率
         float zxi = zxs;
         
         if ( fm == FILL_SOLID )
@@ -453,7 +453,7 @@ void Rasterizer::RasterizeLeftTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** c
             {
                 for (int x = ROUND(xs); x <= ROUND(xe); ++x)
                 {
-                    if ( zb != nullptr ) // zbufferÏûÒþ
+                    if ( zb != nullptr ) // zbuffer消隐
                     {
                         if ( zxi < zb[x][y] )
                         {
@@ -472,7 +472,7 @@ void Rasterizer::RasterizeLeftTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** c
             {
                 for (int x = ROUND(xs); x <= ROUND(xe); ++x)
                 {
-                    if ( zb != nullptr ) // zbufferÏûÒþ
+                    if ( zb != nullptr ) // zbuffer消隐
                     {
                         if ( zxi < zb[x][y] )
                         {
@@ -491,7 +491,7 @@ void Rasterizer::RasterizeLeftTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** c
         }
         else if (fm == FILL_WIREFRAME)
         {
-            if ( zb != nullptr ) // zbufferÏûÒþ
+            if ( zb != nullptr ) // zbuffer消隐
             {
                 if ( zxs < zb[ROUND(xs)][y] )
                 {
@@ -516,7 +516,7 @@ void Rasterizer::RasterizeLeftTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** c
     }
 }
 
-/* case 3 ÓÒÈý½ÇÐÎ
+/* case 3 右三角形
  *
  *     p0
  *
@@ -527,21 +527,21 @@ void Rasterizer::RasterizeLeftTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** c
  */
 void Rasterizer::RasterizeRightTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** cb, float** zb, FillMode fm, ShadeMode sm)
 {
-    float xs, xe;   // ¶Ëµã start end
-    float dxy_left, dxy_right;  // ×óÓÒ±ßÐ±ÂÊµÄµ¹Êý
-    Vertex p;	// ·Ö¸îµã
-    float T; // ·Ö¸îµã²ÎÊý
+    float xs, xe;   // start end
+    float dxy_left, dxy_right;  //左右斜率倒数
+    Vertex p;	// 分割点
+    float T; // 分割点参数
     vec3 p0p1, p0p2;
     
-    // ¼ÆËã·Ö¸îµãp
+    // 计算分割点
     float deltaYp0p2 = 1 / (p2->v.y - p0->v.y);
     float deltaYp0p1 = 1 / (p1->v.y - p0->v.y);
     float deltaYp1p2 = 1 / (p1->v.y - p2->v.y);
     dxy_left = deltaYp0p2 * (p2->v.x - p0->v.x);
     dxy_right = deltaYp0p1 * (p1->v.x - p0->v.x);
-    float t; // ²åÖµ²ÎÊý
+    float t; // 插值参数
     
-    // p0p1Ö±Ïß²ÎÊý·½³Ì
+    // p0p1直线参数方程
     p0p1 = vec3((p1->v - p0->v));// ·½Ïò
     p0p1 = normalize(p0p1);
     p.v.y = p2->v.y;
@@ -550,9 +550,9 @@ void Rasterizer::RasterizeRightTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** 
     //p.c = deltaYp0p1 * (p0->c * (p1->v.y - p.v.y) + p1->c * (p.v.y - p0->v.y));
     p.c = LERP(p0->c, p1->c, T * deltaYp0p1);
     p.v.z = LERPf(p0->v.z, p1->v.z,  T);
-    // °´Æ½µ×Èý½ÇÐÎ´¦Àí p0pp2
+    //按平底三角形处理 p0 p p2
     xs = xe = p0->v.x;
-    // »æÖÆÃ¿ÌõÉ¨ÃèÏß
+    // 绘制每一条扫描线
     for (int y = ROUND(p0->v.y); y <= ROUND(p2->v.y); ++y)
     {
         t = deltaYp0p2 * (y - p0->v.y);
@@ -566,14 +566,14 @@ void Rasterizer::RasterizeRightTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** 
         
         Color deltac(0, 0, 0);
         if (!FloatEqual(xs, xe))
-            deltac = (cxe - cxs) / (xe - xs); // ÑÕÉ«ÑØÉ¨ÃèÏßµÄ±ä»¯ÂÊ
+            deltac = (cxe - cxs) / (xe - xs); // 颜色沿扫描线变化率
         Color cxi = cxs;
         
         float zxs = LERPf(p0->v.z, p2->v.z, t);
         float zxe = LERPf(p0->v.z, p.v.z, t);
         float deltaz = 0;
         if (!FloatEqual(xs, xe))
-            deltaz = (zxe - zxs) / (xe - xs); // Éî¶ÈÑØÉ¨ÃèÏßµÄ±ä»¯ÂÊ
+            deltaz = (zxe - zxs) / (xe - xs); // 深度沿扫描线变化率
         float zxi = zxs;
         
         if ( fm == FILL_SOLID )
@@ -582,7 +582,7 @@ void Rasterizer::RasterizeRightTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** 
             {
                 for (int x = ROUND(xs); x <= ROUND(xe); ++x)
                 {
-                    if ( zb != nullptr ) // zbufferÏûÒþ
+                    if ( zb != nullptr ) // zbuffer消隐
                     {
                         if ( zxi < zb[x][y] )
                         {
@@ -601,7 +601,7 @@ void Rasterizer::RasterizeRightTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** 
             {
                 for (int x = ROUND(xs); x <= ROUND(xe); ++x)
                 {
-                    if ( zb != nullptr ) // zbufferÏûÒþ
+                    if ( zb != nullptr ) // zbuffer消隐
                     {
                         if ( zxi < zb[x][y] )
                         {
@@ -621,7 +621,7 @@ void Rasterizer::RasterizeRightTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** 
         }
         else if (fm == FILL_WIREFRAME)
         {
-            if ( zb != nullptr ) // zbufferÏûÒþ
+            if ( zb != nullptr ) // zbuffer消隐
             {
                 if ( zxs < zb[ROUND(xs)][y] )
                 {
@@ -645,11 +645,11 @@ void Rasterizer::RasterizeRightTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** 
         xe += dxy_right;
     }
     
-    // °´Æ½¶¥Èý½ÇÐÎ´¦Àí pp1p2
+    // 按照平顶三角形处理 pp1p2
     xs = p2->v.x;
     xe = p.v.x;
     dxy_left = deltaYp1p2 * (p1->v.x - p2->v.x);
-    // »æÖÆÃ¿ÌõÉ¨ÃèÏß
+    // 绘制扫描线
     for (int y = ROUND(p2->v.y); y <= ROUND(p1->v.y); ++y)
     {
         t = deltaYp1p2 * (y - p2->v.y);
@@ -663,14 +663,14 @@ void Rasterizer::RasterizeRightTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** 
         
         Color deltac(0, 0, 0);
         if (!FloatEqual(xs, xe))
-            deltac = (cxe - cxs) / (xe - xs); // ÑÕÉ«ÑØÉ¨ÃèÏßµÄ±ä»¯ÂÊ
+            deltac = (cxe - cxs) / (xe - xs); // 颜色沿着扫描线变化率
         Color cxi = cxs;
         
         float zxs = LERPf(p2->v.z, p1->v.z, t);
         float zxe = LERPf(p.v.z, p1->v.z, t);
         float deltaz = 0;
         if (!FloatEqual(xs, xe))
-            deltaz = (zxe - zxs) / (xe - xs); // Éî¶ÈÑØÉ¨ÃèÏßµÄ±ä»¯ÂÊ
+            deltaz = (zxe - zxs) / (xe - xs); // 深度沿着扫描线变化率
         float zxi = zxs;
         
         if ( fm == FILL_SOLID )
@@ -679,7 +679,7 @@ void Rasterizer::RasterizeRightTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** 
             {
                 for (int x = ROUND(xs); x <= ROUND(xe); ++x)
                 {
-                    if ( zb != nullptr ) // zbufferÏûÒþ
+                    if ( zb != nullptr ) // zbuffer消隐
                     {
                         if ( zxi < zb[x][y] )
                         {
@@ -700,7 +700,7 @@ void Rasterizer::RasterizeRightTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** 
                 {
                     for (int x = ROUND(xs); x <= ROUND(xe); ++x)
                     {
-                        if ( zb != nullptr ) // zbufferÏûÒþ
+                        if ( zb != nullptr ) // zbuffer消隐
                         {
                             if ( zxi < zb[x][y] )
                             {
@@ -720,7 +720,7 @@ void Rasterizer::RasterizeRightTri(Vertex* p0, Vertex* p1, Vertex* p2, Uint32** 
         }
         else if (fm == FILL_WIREFRAME)
         {
-            if ( zb != nullptr ) // zbufferÏûÒþ
+            if ( zb != nullptr ) // zbuffer消隐
             {
                 if ( zxs < zb[ROUND(xs)][y] )
                 {
