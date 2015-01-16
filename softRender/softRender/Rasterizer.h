@@ -15,7 +15,7 @@
 using namespace glm;
 
 typedef struct tVertex{
-    vec4 v;
+    vec3 v;
     vec3 n;
     
     Color c;

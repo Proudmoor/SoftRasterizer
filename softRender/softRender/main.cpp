@@ -6,19 +6,67 @@
 //  Copyright (c) 2015年 zpf. All rights reserved.
 //
 
-#include <stdio.h>
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "drawprim.cpp"
+#include <stdlib.h>
 
 #include <sstream>
 
 
 
+SDL_Window* gWindow;
+SDL_Renderer* gRenderer;
+SDL_Texture*  backBuffer;
+SDL_Surface*  gSurface;
 
+Uint32 *colorBuffer;
+float * depthBuffer;
 
+int height = 480; int width = 640;
 
+bool Init(bool fullscreen) {
+    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+        return false;
+    }
+    
+    Uint32 windowFlags = SDL_WINDOW_SHOWN;
+    if (fullscreen) {
+        windowFlags |= SDL_WINDOW_FULLSCREEN;
+    }
+    
+    gWindow = SDL_CreateWindow("Software Renderer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+                               width, height, windowFlags);
+    if (gWindow == nullptr)
+        return false;
+    SDL_Surface *surface = SDL_GetWindowSurface(gWindow);
+    if (surface == nullptr)
+        return false;
+    gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_SOFTWARE);
+    if (gRenderer == nullptr)
+        return false;
+    backBuffer = SDL_CreateTexture(gRenderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+    if (backBuffer == nullptr)
+        return false;
+    depthBuffer = new (float *)  (width * height * sizeof(float));
+    
+    SDL_ShowCursor(false);
+    SDL_SetWindowGrab(gWindow, SDL_TRUE);
+    SDL_SetRelativeMouseMode(SDL_TRUE);
+    
+    return true;
+    
+}
 
+void Close() {
+    free(depthBuffer);
+    
+    SDL_DestroyTexture(backBuffer);
+    SDL_DestroyRenderer(gRenderer);
+    SDL_DestroyWindow(gWindow);
+    
+    SDL_Quit();
+}
 int main(int argc, char** argv) {
     bool quit = false;
     bool leftMouseButtonDown = false;

@@ -13,6 +13,9 @@
 		E2F22E4F1A69003000DC8A1D /* Rasterizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F22E4D1A69003000DC8A1D /* Rasterizer.cpp */; };
 		E2F22E521A69003F00DC8A1D /* Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F22E501A69003F00DC8A1D /* Color.cpp */; };
 		E2F22E551A690CDF00DC8A1D /* Math.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F22E531A690CDF00DC8A1D /* Math.cpp */; };
+		E2F22E581A694B1A00DC8A1D /* Render.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F22E561A694B1A00DC8A1D /* Render.cpp */; };
+		E2F22E5B1A6960C300DC8A1D /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F22E591A6960C300DC8A1D /* Light.cpp */; };
+		E2F22E5E1A6960DC00DC8A1D /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F22E5C1A6960DC00DC8A1D /* Camera.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,6 +41,12 @@
 		E2F22E511A69003F00DC8A1D /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		E2F22E531A690CDF00DC8A1D /* Math.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Math.cpp; sourceTree = "<group>"; };
 		E2F22E541A690CDF00DC8A1D /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
+		E2F22E561A694B1A00DC8A1D /* Render.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Render.cpp; sourceTree = "<group>"; };
+		E2F22E571A694B1A00DC8A1D /* Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Render.h; sourceTree = "<group>"; };
+		E2F22E591A6960C300DC8A1D /* Light.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Light.cpp; sourceTree = "<group>"; };
+		E2F22E5A1A6960C300DC8A1D /* Light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
+		E2F22E5C1A6960DC00DC8A1D /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		E2F22E5D1A6960DC00DC8A1D /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +90,12 @@
 				E2F22E511A69003F00DC8A1D /* Color.h */,
 				E2F22E531A690CDF00DC8A1D /* Math.cpp */,
 				E2F22E541A690CDF00DC8A1D /* Math.h */,
+				E2F22E561A694B1A00DC8A1D /* Render.cpp */,
+				E2F22E571A694B1A00DC8A1D /* Render.h */,
+				E2F22E591A6960C300DC8A1D /* Light.cpp */,
+				E2F22E5A1A6960C300DC8A1D /* Light.h */,
+				E2F22E5C1A6960DC00DC8A1D /* Camera.cpp */,
+				E2F22E5D1A6960DC00DC8A1D /* Camera.h */,
 			);
 			path = softRender;
 			sourceTree = "<group>";
@@ -141,9 +156,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2F22E5B1A6960C300DC8A1D /* Light.cpp in Sources */,
 				E2F22E521A69003F00DC8A1D /* Color.cpp in Sources */,
+				E2F22E5E1A6960DC00DC8A1D /* Camera.cpp in Sources */,
 				E2F22E4F1A69003000DC8A1D /* Rasterizer.cpp in Sources */,
 				E24418571A66B2BA00EC71A5 /* main.cpp in Sources */,
+				E2F22E581A694B1A00DC8A1D /* Render.cpp in Sources */,
 				E2F22E551A690CDF00DC8A1D /* Math.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
