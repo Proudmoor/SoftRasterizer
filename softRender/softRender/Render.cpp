@@ -292,44 +292,16 @@ void SoftRenderer::Render()
         switch(type)
         {
             case TOP:
-                /* case 0 Æ½¶¥Èý½ÇÐÎ
-                 *
-                 *  p0      p1
-                 *
-                 *      p2
-                 */
-                m_pRas->RasterizeTopTri(p0, p1, p2, BCB, m_bZEnable ? BZB : nullptr, m_eFillMode, m_eShadeMode);
+                                m_pRas->RasterizeTopTri(p0, p1, p2, BCB, m_bZEnable ? BZB : nullptr, m_eFillMode, m_eShadeMode);
                 break;
             case BOTTOM:
-                /* case 1 Æ½µ×Èý½ÇÐÎ
-                 *
-                 *     p0
-                 *
-                 *  p2      p1
-                 */
-                m_pRas->RasterizeBottomTri(p0, p1, p2, BCB, m_bZEnable ? BZB : nullptr, m_eFillMode, m_eShadeMode);
+                                m_pRas->RasterizeBottomTri(p0, p1, p2, BCB, m_bZEnable ? BZB : nullptr, m_eFillMode, m_eShadeMode);
                 break;
             case LEFT:
-                /* case 2 ×óÈý½ÇÐÎ
-                 *     p0
-                 *
-                 *   p       p1
-                 *
-                 *
-                 *  p2
-                 */
-                m_pRas->RasterizeLeftTri(p0, p1, p2, BCB, m_bZEnable ? BZB : nullptr, m_eFillMode, m_eShadeMode);
+                                m_pRas->RasterizeLeftTri(p0, p1, p2, BCB, m_bZEnable ? BZB : nullptr, m_eFillMode, m_eShadeMode);
                 break;
             case RIGHT:
-                /* case 3 ÓÒÈý½ÇÐÎ
-                 *
-                 *     p0
-                 *
-                 *  p2      p
-                 *
-                 *
-                 *			p1
-                 */
+                
                 m_pRas->RasterizeRightTri(p0, p1, p2, BCB, m_bZEnable ? BZB : nullptr, m_eFillMode, m_eShadeMode);
                 break;
         }
@@ -363,7 +335,7 @@ void SoftRenderer::TL(size_t vi)
     // vertex transformation
     TVB[vi].v = VB[vi].v * WV;
     // normal transform
-    TVB[vi].n = (vec3(VB[vi].n, 0.0f) * WV).Tovec3(); // ÍµÀÁ·¨ ¸üÎÈÍ×µÄ°ì·¨ÊÇÓÃÄæ×ªÖÃ
+    TVB[vi].n = (vec3(VB[vi].n, 0.0f) * WV).Tovec3();
     TVB[vi].n.Normalize();
     
     // lighting in camera space
@@ -386,11 +358,11 @@ void SoftRenderer::TL(size_t vi)
             float NdotL = DotProduct(lightDirCS, TVB[vi].n);
             diffuse = Clampf(NdotL, 0.0f, 1.0f) * L->Kd * m_pM->Kd;
             diffuse.Clamp();
-            
-            // 			vec3 v = m_ViewerPos - TVB[vi].v.Tovec3(); // ÊÓÏß·½Ïò
+
+            // 			vec3 v = m_ViewerPos - TVB[vi].v.Tovec3(); // 视线方向
             // 			v.Normalize();
             // 
-            // 			vec3 r = 2 * NdotL * TVB[vi].n - lightDirCS; // ·´Éä·½Ïò
+            // 			vec3 r = 2 * NdotL * TVB[vi].n - lightDirCS; // 反射方向
             // 			specular = pow(Clampf(DotProduct(r, v), 0.0f, 1.0f), m_pM->Ksh) * L->Ks * m_pM->Ks;
             
             // TODO: Blinn-Phong
