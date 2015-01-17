@@ -196,7 +196,7 @@ void SoftRenderer::SetupMatrices()
     //m_model = RotateX(m_fXAngle);
 //    m_world *= RotateY(m_fYAngle);
     
-    m_world  = glm::rotate(m_world, m_fYAngle, vec3(0,1,0));
+    //m_world  = ;
     
     // Position and aim the camera
     vec3 position(0.0f, 3.0f, -5.0f);
@@ -335,7 +335,7 @@ void SoftRenderer::Clear(Uint32 flags, Uint32 color, float z, Uint32 stencil)
 // eye space T&L
 void SoftRenderer::TL(size_t vi)
 {
-    mat4 WV =  m_world * m_view;
+    mat4 WV =  m_view;
     // vertex transformation
     TVB[vi].v = vec3(inverse(WV) * vec4((VB[vi].v)));
     
@@ -362,20 +362,12 @@ void SoftRenderer::TL(size_t vi)
             vec3 lightDirCS = vec3(inverse(WV) * vec4(L->Dir));
             normalize(lightDirCS);
             
-            float NdotL = (float)(dot(lightDirCS  ,TVB[vi].n));
+            float NdotL = (dot(lightDirCS  ,TVB[vi].n));
             
         
     
             diffuse = Clampf(NdotL, 0.0f, 1.0f) * L->Kd * m_pM->Kd;
             diffuse.Clamp();
-
-            // 			vec3 v = m_ViewerPos - TVB[vi].v.Tovec3(); // 视线方向
-            // 			v.Normalize();
-            // 
-            // 			vec3 r = 2 * NdotL * TVB[vi].n - lightDirCS; // 反射方向
-            // 			specular = pow(Clampf(DotProduct(r, v), 0.0f, 1.0f), m_pM->Ksh) * L->Ks * m_pM->Ks;
-            
-            // TODO: Blinn-Phong
         }
         
         TVB[vi].c = ambient + diffuse;
@@ -386,13 +378,6 @@ void SoftRenderer::TL(size_t vi)
     // projection 
     TVB[vi].v = vec3(inverse(m_proj) *vec4((TVB[vi].v)) );
     
-//    // perspective division -- NDC (*)
-//    TVB[vi].v /= TVB[vi].v.w;
-//    //   	TVB[vi].v.x /= TVB[vi].v.w;
-//    //   	TVB[vi].v.y /= TVB[vi].v.w;
-//    //   	TVB[vi].v.z /= TVB[vi].v.w;
-//    
-//    // viewport transformation (*)
-//    TVB[vi].v = TVB[vi].v * m_port;
+
 }
 
