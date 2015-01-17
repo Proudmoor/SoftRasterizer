@@ -22,6 +22,12 @@ struct Texture {
             fprintf(stderr, "Failed to load image: %s", fileName);
             return false;
         }
+        
+        printf("Width: %d  Height: %d  Depth: %d  Bpp: %d\n",
+               ilGetInteger(IL_IMAGE_WIDTH),
+               ilGetInteger(IL_IMAGE_HEIGHT),
+               ilGetInteger(IL_IMAGE_DEPTH),
+               ilGetInteger(IL_IMAGE_BITS_PER_PIXEL));
 
         if (!ilConvertImage(IL_BGRA, IL_UNSIGNED_BYTE)) {
             fprintf(stderr, "Failed to convert image %s to RGBA GL_UNSIGNED_BYTE", fileName);
@@ -169,7 +175,12 @@ bool Init(bool fullscreen)
 {
     printf("ilInit\n");
     ilInit();
-    printf("ilInit success");
+    printf("ilInit success\n");
+    
+#ifdef ILU_ENABLED
+    iluInit();
+#endif
+    
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
         printf("SDL_Init false");
         return false;
@@ -345,9 +356,9 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    if (!Init(false))
-        std::cout << "Init Error"<< std::endl;
-        return 1;
+//    if (!Init(true))
+//        std::cout << "Init Error"<< std::endl;
+//        return 1;
 
     Camera camera;
     camera.SetClippingPlanes(0.01f, 10.0f);
@@ -358,6 +369,7 @@ int main(int argc, char **argv)
 
     World world;
     if (!world.Load(argv[1]))
+        printf("Load World failed");
         return 1;
 
     float rotation = 0.0f;

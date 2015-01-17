@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E21429F21A6A813E004B0CE7 /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F22F571A6A5FB800DC8A1D /* libassimp.a */; };
+		E21429F51A6A838F004B0CE7 /* libILU.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E21429F31A6A838F004B0CE7 /* libILU.a */; };
+		E21429F61A6A838F004B0CE7 /* libILUT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E21429F41A6A838F004B0CE7 /* libILUT.a */; };
+		E21429F71A6A85CE004B0CE7 /* libassimp.3.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F22F591A6A630800DC8A1D /* libassimp.3.1.1.dylib */; settings = {ATTRIBUTES = (Required, ); }; };
 		E24418571A66B2BA00EC71A5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24418561A66B2BA00EC71A5 /* main.cpp */; };
 		E244185F1A66B2DE00EC71A5 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185D1A66B2DE00EC71A5 /* SDL2_image.framework */; };
 		E24418601A66B2DE00EC71A5 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185E1A66B2DE00EC71A5 /* SDL2.framework */; };
@@ -48,6 +50,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E21429F31A6A838F004B0CE7 /* libILU.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libILU.a; path = ../../../../../usr/local/Cellar/devil/1.7.8_1/lib/libILU.a; sourceTree = "<group>"; };
+		E21429F41A6A838F004B0CE7 /* libILUT.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libILUT.a; path = ../../../../../usr/local/Cellar/devil/1.7.8_1/lib/libILUT.a; sourceTree = "<group>"; };
 		E24418531A66B2BA00EC71A5 /* softRender */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = softRender; sourceTree = BUILT_PRODUCTS_DIR; };
 		E24418561A66B2BA00EC71A5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E244185D1A66B2DE00EC71A5 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
@@ -295,8 +299,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E21429F21A6A813E004B0CE7 /* libassimp.a in Frameworks */,
+				E21429F51A6A838F004B0CE7 /* libILU.a in Frameworks */,
+				E21429F61A6A838F004B0CE7 /* libILUT.a in Frameworks */,
 				E2F22F661A6A784B00DC8A1D /* libpng16.a in Frameworks */,
+				E21429F71A6A85CE004B0CE7 /* libassimp.3.1.1.dylib in Frameworks */,
 				E2F22F691A6A7D4400DC8A1D /* SDL2.framework in Frameworks */,
 				E2F22F631A6A735D00DC8A1D /* libIL.a in Frameworks */,
 			);
@@ -308,6 +314,8 @@
 		E244184A1A66B2BA00EC71A5 = {
 			isa = PBXGroup;
 			children = (
+				E21429F31A6A838F004B0CE7 /* libILU.a */,
+				E21429F41A6A838F004B0CE7 /* libILUT.a */,
 				E2F22F641A6A766600DC8A1D /* libpng16.a */,
 				E2F22F5F1A6A72AE00DC8A1D /* libpng16.16.dylib */,
 				E2F22F5D1A6A64D500DC8A1D /* libIL.a */,
