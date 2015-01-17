@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		E21429F51A6A838F004B0CE7 /* libILU.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E21429F31A6A838F004B0CE7 /* libILU.a */; };
 		E21429F61A6A838F004B0CE7 /* libILUT.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E21429F41A6A838F004B0CE7 /* libILUT.a */; };
-		E21429F71A6A85CE004B0CE7 /* libassimp.3.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F22F591A6A630800DC8A1D /* libassimp.3.1.1.dylib */; settings = {ATTRIBUTES = (Required, ); }; };
+		E21429F91A6A9FEE004B0CE7 /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F22F571A6A5FB800DC8A1D /* libassimp.a */; };
+		E21429FA1A6AA035004B0CE7 /* libassimp.3.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F22F591A6A630800DC8A1D /* libassimp.3.1.1.dylib */; };
+		E21429FC1A6AB5C4004B0CE7 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185E1A66B2DE00EC71A5 /* SDL2.framework */; };
 		E24418571A66B2BA00EC71A5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24418561A66B2BA00EC71A5 /* main.cpp */; };
 		E244185F1A66B2DE00EC71A5 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185D1A66B2DE00EC71A5 /* SDL2_image.framework */; };
 		E24418601A66B2DE00EC71A5 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185E1A66B2DE00EC71A5 /* SDL2.framework */; };
@@ -24,8 +26,6 @@
 		E2F22F561A6A52E300DC8A1D /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F22F541A6A52E300DC8A1D /* Camera.cpp */; };
 		E2F22F5E1A6A64D500DC8A1D /* libIL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F22F5D1A6A64D500DC8A1D /* libIL.a */; };
 		E2F22F631A6A735D00DC8A1D /* libIL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F22F5D1A6A64D500DC8A1D /* libIL.a */; };
-		E2F22F661A6A784B00DC8A1D /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F22F641A6A766600DC8A1D /* libpng16.a */; };
-		E2F22F691A6A7D4400DC8A1D /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185E1A66B2DE00EC71A5 /* SDL2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +52,7 @@
 /* Begin PBXFileReference section */
 		E21429F31A6A838F004B0CE7 /* libILU.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libILU.a; path = ../../../../../usr/local/Cellar/devil/1.7.8_1/lib/libILU.a; sourceTree = "<group>"; };
 		E21429F41A6A838F004B0CE7 /* libILUT.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libILUT.a; path = ../../../../../usr/local/Cellar/devil/1.7.8_1/lib/libILUT.a; sourceTree = "<group>"; };
+		E21429F81A6A9B93004B0CE7 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = build/Debug/cube.obj; sourceTree = SOURCE_ROOT; };
 		E24418531A66B2BA00EC71A5 /* softRender */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = softRender; sourceTree = BUILT_PRODUCTS_DIR; };
 		E24418561A66B2BA00EC71A5 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E244185D1A66B2DE00EC71A5 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
@@ -68,9 +69,7 @@
 		E2F22E5A1A6960C300DC8A1D /* Light.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
 		E2F22E631A6A3D3500DC8A1D /* cube */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cube; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2F22E6A1A6A3D8C00DC8A1D /* cube.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.mtl; path = softRender/cube/cube.mtl; sourceTree = SOURCE_ROOT; };
-		E2F22E6B1A6A3D8C00DC8A1D /* cube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cube.png; path = softRender/cube/cube.png; sourceTree = SOURCE_ROOT; };
 		E2F22E6C1A6A3D8C00DC8A1D /* floor.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = floor.mtl; path = softRender/cube/floor.mtl; sourceTree = SOURCE_ROOT; };
-		E2F22E6D1A6A3D8C00DC8A1D /* floor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = floor.png; path = softRender/cube/floor.png; sourceTree = SOURCE_ROOT; };
 		E2F22E6F1A6A3D8C00DC8A1D /* camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = camera.cpp; sourceTree = "<group>"; };
 		E2F22E701A6A3D8C00DC8A1D /* camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camera.h; sourceTree = "<group>"; };
 		E2F22E711A6A3D8C00DC8A1D /* precompiled.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = precompiled.cpp; sourceTree = "<group>"; };
@@ -301,9 +300,9 @@
 			files = (
 				E21429F51A6A838F004B0CE7 /* libILU.a in Frameworks */,
 				E21429F61A6A838F004B0CE7 /* libILUT.a in Frameworks */,
-				E2F22F661A6A784B00DC8A1D /* libpng16.a in Frameworks */,
-				E21429F71A6A85CE004B0CE7 /* libassimp.3.1.1.dylib in Frameworks */,
-				E2F22F691A6A7D4400DC8A1D /* SDL2.framework in Frameworks */,
+				E21429FA1A6AA035004B0CE7 /* libassimp.3.1.1.dylib in Frameworks */,
+				E21429FC1A6AB5C4004B0CE7 /* SDL2.framework in Frameworks */,
+				E21429F91A6A9FEE004B0CE7 /* libassimp.a in Frameworks */,
 				E2F22F631A6A735D00DC8A1D /* libIL.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -362,10 +361,9 @@
 		E2F22E641A6A3D3500DC8A1D /* cube */ = {
 			isa = PBXGroup;
 			children = (
+				E21429F81A6A9B93004B0CE7 /* cube.obj */,
 				E2F22E6A1A6A3D8C00DC8A1D /* cube.mtl */,
-				E2F22E6B1A6A3D8C00DC8A1D /* cube.png */,
 				E2F22E6C1A6A3D8C00DC8A1D /* floor.mtl */,
-				E2F22E6D1A6A3D8C00DC8A1D /* floor.png */,
 				E2F22E6E1A6A3D8C00DC8A1D /* source */,
 				E2F22E741A6A3D8C00DC8A1D /* third-party */,
 			);

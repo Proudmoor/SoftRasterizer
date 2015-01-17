@@ -15,6 +15,9 @@
 #include <assimp/Scene.h>
 #include <assimp/postprocess.h>
 #include <assimp/cimport.h>
+#include <assimp/DefaultLogger.hpp>
+#include <assimp/LogStream.hpp>
+
 
 #include <immintrin.h>
 

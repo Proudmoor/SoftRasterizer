@@ -26,7 +26,7 @@ float * depthBuffer;
 int height = 480; int width = 640;
 
 bool Init(bool fullscreen) {
-    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+    if (!SDL_Init(SDL_INIT_EVERYTHING)) {
         return false;
     }
     

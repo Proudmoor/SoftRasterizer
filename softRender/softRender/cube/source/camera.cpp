@@ -5,7 +5,7 @@
 Camera::Camera()
 {
     SetViewport(0, 0, 640, 480);
-    SetFOV(0.25f * M_PI);
+    SetFOV(float(0.25f * M_PI));
     SetClippingPlanes(1.0f, 100.0f);
 
     position = Point3(0.0f, 0.0f, 10.0f);

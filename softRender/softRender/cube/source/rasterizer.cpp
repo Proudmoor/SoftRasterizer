@@ -1,6 +1,14 @@
 #include "camera.h"
 #include <cpuid.h>
 #include <iostream>
+#include <sstream>
+
+#ifdef ILU_ENABLED
+#include <IL/ilu.h>
+#define PRINT_ERROR_MACRO printf("Error: %s\n", iluErrorString(Error))
+#else /* not ILU_ENABLED */
+#define PRINT_ERROR_MACRO printf("Error: 0x%X\n", (unsigned int)Error)
+#endif /* not ILU_ENABLED */
 
 
 struct Vertex {
@@ -17,17 +25,16 @@ struct Texture {
         ILuint image;
         ilGenImages(1, &image);
         ilBindImage(image);
-
+        ILenum	Error;
+        
         if (!ilLoadImage(fileName)) {
-            fprintf(stderr, "Failed to load image: %s", fileName);
+            fprintf(stderr, "Failed to load image: %s  ", fileName);
+            while ((Error = ilGetError())) {
+                PRINT_ERROR_MACRO;}
             return false;
         }
         
-        printf("Width: %d  Height: %d  Depth: %d  Bpp: %d\n",
-               ilGetInteger(IL_IMAGE_WIDTH),
-               ilGetInteger(IL_IMAGE_HEIGHT),
-               ilGetInteger(IL_IMAGE_DEPTH),
-               ilGetInteger(IL_IMAGE_BITS_PER_PIXEL));
+        
 
         if (!ilConvertImage(IL_BGRA, IL_UNSIGNED_BYTE)) {
             fprintf(stderr, "Failed to convert image %s to RGBA GL_UNSIGNED_BYTE", fileName);
@@ -37,9 +44,17 @@ struct Texture {
         width = ilGetInteger(IL_IMAGE_WIDTH);
         height = ilGetInteger(IL_IMAGE_HEIGHT);
         pixels = (uint32_t *)malloc(width * height * sizeof(uint32_t));
+        
 
         int format = ilGetInteger(IL_IMAGE_FORMAT);
         int type = ilGetInteger(IL_IMAGE_TYPE);
+        printf("Width: %d  Height: %d  Depth: %d  Bpp: %d\n Format: %d Type: %d\n",
+               ilGetInteger(IL_IMAGE_WIDTH),
+               ilGetInteger(IL_IMAGE_HEIGHT),
+               ilGetInteger(IL_IMAGE_DEPTH),
+               ilGetInteger(IL_IMAGE_BITS_PER_PIXEL),
+               ilGetInteger(IL_IMAGE_FORMAT),
+               ilGetInteger(IL_IMAGE_TYPE));
 
         if (ilCopyPixels(0, 0, 0, width, height, 1, format, type, pixels) == IL_FALSE) {
             fprintf(stderr, "Failed to copy pixels from %s", fileName);
@@ -144,11 +159,11 @@ struct World {
         geometries = new Geometry[numGeometries];
 
         int totalTriangles = 0;
-
+//        aiMesh* mesh = new aiMesh[sizeof(loadedScene->mMeshes)];
         for (int i = 0; i < numGeometries; ++i) {
             aiMesh *mesh = loadedScene->mMeshes[i];
-            if (!geometries[i].Load(mesh, loadedScene->mMaterials[mesh->mMaterialIndex]))
-                return false;
+            geometries[i].Load(mesh, loadedScene->mMaterials[mesh->mMaterialIndex]);
+                
             totalTriangles += 3 * mesh->mNumFaces;
         }
 
@@ -168,64 +183,60 @@ SDL_Texture *backBuffer;
 unsigned int *colorBuffer;
 float *depthBuffer;
 
-int width = 1920;
-int height = 1080;
+int width = 640;
+int height = 480;
 
 bool Init(bool fullscreen)
 {
-    printf("ilInit\n");
     ilInit();
-    printf("ilInit success\n");
     
-#ifdef ILU_ENABLED
-    iluInit();
-#endif
-    
-    if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
-        printf("SDL_Init false");
-        return false;
-
+   if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
+   {
+       return false;
+   }
     uint32_t windowFlags = SDL_WINDOW_SHOWN;
 
     if (fullscreen)
         windowFlags |= SDL_WINDOW_FULLSCREEN;
 
-    window = SDL_CreateWindow("Software Renderer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
-    if (window == nullptr)
+    window = SDL_CreateWindow("Software Renderer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, windowFlags);
+    if (window == nullptr){
         printf("SDL_window false");
-        return false;
+        return false;}
+    
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
+    if( renderer == NULL )
+    {
+        printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
+        return   false;
+    }
+    
     SDL_Surface *surface = SDL_GetWindowSurface(window);
     if (surface == nullptr)
-        printf("SDL_surface false");
         return false;
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
-    if (renderer == nullptr)
-        printf("SDL_renderer false");
-        return false;
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+//    SDL_Surface *surface = SDL_GetWindowSurface(window);
+//    if (surface == nullptr)
+//        return false;
+    
+    
     backBuffer = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
-    if (backBuffer == nullptr)
+    if (backBuffer == nullptr){
         printf("SDL_surface false");
         return false;
+    }
 
     depthBuffer = (float *)malloc(width * height * sizeof(float));
 
     SDL_ShowCursor(false);
-    SDL_SetWindowGrab(window, SDL_TRUE);
-    SDL_SetRelativeMouseMode(SDL_TRUE);
+    //SDL_SetWindowGrab(window, SDL_TRUE);
+    //SDL_SetRelativeMouseMode(SDL_TRUE);
 
     return true;
 }
 
-void Close()
-{
-    free(depthBuffer);
 
-    SDL_DestroyTexture(backBuffer);
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-
-    SDL_Quit();
-}
 
 void Rasterize(Geometry *geometry, Matrix4 &worldMatrix, Camera &camera)
 {
@@ -332,6 +343,8 @@ void Rasterize(Geometry *geometry, Matrix4 &worldMatrix, Camera &camera)
 
 void Rasterize(Matrix4 &worldMatrix, Geometry *geometries, int numGeometries, Camera &camera)
 {
+    
+//    depthBuffer = (float *)malloc(width * height * sizeof(float));
     memset(depthBuffer, 0x0, width * height * sizeof(float));
 
     int pitch = 0;
@@ -345,7 +358,9 @@ void Rasterize(Matrix4 &worldMatrix, Geometry *geometries, int numGeometries, Ca
     SDL_UnlockTexture(backBuffer);
     SDL_RenderCopy(renderer, backBuffer, nullptr, nullptr);
     SDL_RenderPresent(renderer);
-    SDL_UpdateWindowSurface(window);
+    //SDL_Delay(100);
+    //SDL_UpdateWindowSurface(window);
+    
 }
 
 int main(int argc, char **argv)
@@ -356,9 +371,8 @@ int main(int argc, char **argv)
         return 1;
     }
 
-//    if (!Init(true))
-//        std::cout << "Init Error"<< std::endl;
-//        return 1;
+    if(!Init(false))
+        return 1;
 
     Camera camera;
     camera.SetClippingPlanes(0.01f, 10.0f);
@@ -369,16 +383,16 @@ int main(int argc, char **argv)
 
     World world;
     if (!world.Load(argv[1]))
-        printf("Load World failed");
         return 1;
+    
 
     float rotation = 0.0f;
 
-    SDL_Event *event;
+    SDL_Event event;
     bool quit = false;
 
-      while (!quit) {
-        //SDL_PumpEvents();
+    while (!quit) {
+        SDL_PumpEvents();
 
         if (SDL_GetKeyboardState(nullptr)[SDL_SCANCODE_ESCAPE])
             break;
@@ -394,10 +408,28 @@ int main(int argc, char **argv)
         dt = time - prevTime;
         prevTime = time;
 
-        char buffer[128];
-        printf(buffer, "FPS: %f Frame Time: %f ms", 1000.0f / dt, dt);
-        SDL_SetWindowTitle(window, buffer);
-    }
+        std::stringstream ss;
+//        printf(ss, "FPS: %f Frame Time: %f ms", 1000.0f / dt, dt);
+        ss << "FPS:     " << 1000.0f/ dt << dt << std::endl;
+        SDL_SetWindowTitle(window, ss.str().c_str());
+        
+        if (event.type == SDL_QUIT)
+            SDL_Quit();
 
+    }
+    
+    
+    
     return 0;
+}
+
+void Close()
+{
+    free(depthBuffer);
+    
+    SDL_DestroyTexture(backBuffer);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    
+    SDL_Quit();
 }
