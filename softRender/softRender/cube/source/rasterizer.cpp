@@ -1,5 +1,4 @@
 #include "camera.h"
-#include <cpuid.h>
 #include <iostream>
 #include <sstream>
 
@@ -26,7 +25,7 @@ struct Texture {
         ilGenImages(1, &image);
         ilBindImage(image);
         ILenum	Error;
-        
+
         if (!ilLoadImage(fileName)) {
             fprintf(stderr, "Failed to load image: %s  ", fileName);
             while ((Error = ilGetError())) {
@@ -204,16 +203,18 @@ bool Init(bool fullscreen)
         printf("SDL_window false");
         return false;}
     
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
+    
+    SDL_Surface *surface = SDL_GetWindowSurface(window);
+    if (surface == nullptr)
+        return false;
+    
+    renderer = SDL_CreateSoftwareRenderer(surface);
     if( renderer == NULL )
     {
         printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
         return   false;
     }
-    
-    SDL_Surface *surface = SDL_GetWindowSurface(window);
-    if (surface == nullptr)
-        return false;
+
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
 //    SDL_Surface *surface = SDL_GetWindowSurface(window);
@@ -230,8 +231,8 @@ bool Init(bool fullscreen)
     depthBuffer = (float *)malloc(width * height * sizeof(float));
 
     SDL_ShowCursor(false);
-    //SDL_SetWindowGrab(window, SDL_TRUE);
-    //SDL_SetRelativeMouseMode(SDL_TRUE);
+    SDL_SetWindowGrab(window, SDL_TRUE);
+    SDL_SetRelativeMouseMode(SDL_TRUE);
 
     return true;
 }
@@ -359,7 +360,7 @@ void Rasterize(Matrix4 &worldMatrix, Geometry *geometries, int numGeometries, Ca
     SDL_RenderCopy(renderer, backBuffer, nullptr, nullptr);
     SDL_RenderPresent(renderer);
     //SDL_Delay(100);
-    //SDL_UpdateWindowSurface(window);
+    SDL_UpdateWindowSurface(window);
     
 }
 
@@ -393,7 +394,7 @@ int main(int argc, char **argv)
 
     while (!quit) {
         SDL_PumpEvents();
-
+        SDL_WaitEvent(&event);
         if (SDL_GetKeyboardState(nullptr)[SDL_SCANCODE_ESCAPE])
             break;
 
@@ -414,22 +415,23 @@ int main(int argc, char **argv)
         SDL_SetWindowTitle(window, ss.str().c_str());
         
         if (event.type == SDL_QUIT)
-            SDL_Quit();
+            quit = true;
+            
 
     }
     
-    
+    SDL_Quit();
     
     return 0;
 }
 
-void Close()
-{
-    free(depthBuffer);
-    
-    SDL_DestroyTexture(backBuffer);
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    
-    SDL_Quit();
-}
+//void Close()
+//{
+//    free(depthBuffer);
+//    
+//    SDL_DestroyTexture(backBuffer);
+//    SDL_DestroyRenderer(renderer);
+//    SDL_DestroyWindow(window);
+//    
+//    SDL_Quit();
+//}
