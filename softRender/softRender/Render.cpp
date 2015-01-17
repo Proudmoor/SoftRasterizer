@@ -337,12 +337,12 @@ void SoftRenderer::TL(size_t vi)
 {
     mat4 WV =  m_world * m_view;
     // vertex transformation
-    TVB[vi].v = vec3(inverse(WV) * vec4(VB[vi].v));
+    TVB[vi].v = vec3(inverse(WV) * vec4((VB[vi].v)));
     
   
     // normal transform
 //    TVB[vi].n = vec3((vec3(VB[vi].n, 0.0f) * WV));
-    TVB[vi].n = vec3(inverse(WV) * vec4(VB[vi].n));
+    TVB[vi].n = vec3(inverse(WV) * vec4((VB[vi].n)));
     normalize ( TVB[vi].n);
     
     // lighting in camera space
@@ -358,11 +358,11 @@ void SoftRenderer::TL(size_t vi)
         {
             Light* L = *Lit;
             // transform light into camera space
-            vec3 lightPosCS = vec3(inverse(WV) * vec4(L->Pos, 1.0f));
-            vec3 lightDirCS = vec3(inverse(WV) * vec4(L->Dir, 0.0f));
+            vec3 lightPosCS = vec3(inverse(WV) * vec4(L->Pos));
+            vec3 lightDirCS = vec3(inverse(WV) * vec4(L->Dir));
             normalize(lightDirCS);
             
-            float NdotL = float(dot(lightDirCS  ,TVB[vi].n));
+            float NdotL = (float)(dot(lightDirCS  ,TVB[vi].n));
             
         
     
@@ -384,7 +384,7 @@ void SoftRenderer::TL(size_t vi)
     }
     
     // projection 
-    TVB[vi].v = vec3(inverse(m_proj) *vec4(TVB[vi].v) );
+    TVB[vi].v = vec3(inverse(m_proj) *vec4((TVB[vi].v)) );
     
 //    // perspective division -- NDC (*)
 //    TVB[vi].v /= TVB[vi].v.w;
