@@ -48,7 +48,7 @@ bool Init(bool fullscreen) {
     backBuffer = SDL_CreateTexture(gRenderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
     if (backBuffer == nullptr)
         return false;
-    depthBuffer = new (float *)  (width * height * sizeof(float));
+    depthBuffer =  (float *) malloc (width * height * sizeof(float));
     
     SDL_ShowCursor(false);
     SDL_SetWindowGrab(gWindow, SDL_TRUE);

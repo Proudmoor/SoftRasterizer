@@ -184,6 +184,10 @@ void SoftRenderer::DeleteIndexBuffer()
     delete[] IB;
 }
 
+
+//void SetViewport(int x, int y, int width, int height) {
+//    float aspect = width / (float) height;
+//}
 void SoftRenderer::SetupMatrices()
 {
     // 	UINT iTime = timeGetTime() % 1000;
@@ -198,12 +202,12 @@ void SoftRenderer::SetupMatrices()
     vec3 position(0.0f, 3.0f, -5.0f);
     vec3 target(0.0f, 0.0f, 0.0f);
     vec3 up(0.0f, 1.0f, 0.0f);
-    m_view = LookAt(position, target, up);
+    m_view = glm::lookAt(position, target, up);
     
     float ar = float(WINDOW_WIDTH) / float(WINDOW_HEIGHT);
-    m_proj = Perspective(M_PI_4, ar, 1.0f, 100.0f);
+    m_proj = glm::perspective((float)M_PI_4, ar, 1.0f, 100.0f);
     
-    m_port = ViewPort(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+    //m_port = ViewPort(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 void SoftRenderer::SetupLights()
@@ -333,10 +337,13 @@ void SoftRenderer::TL(size_t vi)
 {
     mat4 WV =  m_world * m_view;
     // vertex transformation
-    TVB[vi].v = VB[vi].v * WV;
+    TVB[vi].v = vec3(inverse(WV) * vec4(VB[vi].v));
+    
+  
     // normal transform
-    TVB[vi].n = (vec3(VB[vi].n, 0.0f) * WV).Tovec3();
-    TVB[vi].n.Normalize();
+//    TVB[vi].n = vec3((vec3(VB[vi].n, 0.0f) * WV));
+    TVB[vi].n = vec3(inverse(WV) * vec4(VB[vi].n));
+    normalize ( TVB[vi].n);
     
     // lighting in camera space
     Color ambient, diffuse, specular;
@@ -351,11 +358,14 @@ void SoftRenderer::TL(size_t vi)
         {
             Light* L = *Lit;
             // transform light into camera space
-            vec3 lightPosCS = vec3(L->Pos, 1.0f) * WV;
-            vec3 lightDirCS = (vec3(L->Dir, 0.0f) * WV).Tovec3();
-            lightDirCS.Normalize();
+            vec3 lightPosCS = vec3(inverse(WV) * vec4(L->Pos, 1.0f));
+            vec3 lightDirCS = vec3(inverse(WV) * vec4(L->Dir, 0.0f));
+            normalize(lightDirCS);
             
-            float NdotL = DotProduct(lightDirCS, TVB[vi].n);
+            float NdotL = float(dot(lightDirCS  ,TVB[vi].n));
+            
+        
+    
             diffuse = Clampf(NdotL, 0.0f, 1.0f) * L->Kd * m_pM->Kd;
             diffuse.Clamp();
 
@@ -374,24 +384,15 @@ void SoftRenderer::TL(size_t vi)
     }
     
     // projection 
-    TVB[vi].v = TVB[vi].v * m_proj;
+    TVB[vi].v = vec3(inverse(m_proj) *vec4(TVB[vi].v) );
     
-    // perspective division -- NDC (*)
-    TVB[vi].v /= TVB[vi].v.w;
-    //   	TVB[vi].v.x /= TVB[vi].v.w;
-    //   	TVB[vi].v.y /= TVB[vi].v.w;
-    //   	TVB[vi].v.z /= TVB[vi].v.w;
-    
-    // viewport transformation (*)
-    TVB[vi].v = TVB[vi].v * m_port;
+//    // perspective division -- NDC (*)
+//    TVB[vi].v /= TVB[vi].v.w;
+//    //   	TVB[vi].v.x /= TVB[vi].v.w;
+//    //   	TVB[vi].v.y /= TVB[vi].v.w;
+//    //   	TVB[vi].v.z /= TVB[vi].v.w;
+//    
+//    // viewport transformation (*)
+//    TVB[vi].v = TVB[vi].v * m_port;
 }
 
-void SoftRenderer::SetXAngle(float radian)
-{
-    m_fXAngle = radian;
-}
-
-void SoftRenderer::SetYAngle(float radian)
-{
-    m_fYAngle = radian;
-}
