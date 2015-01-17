@@ -1,126 +1,120 @@
-#include "Camera.h"
-#include <cmath>
-#include <glm/gtc/matrix_transform.hpp>
+#include "camera.h"
 
-using namespace tdogl;
+#define CAMERA_LINEAR_SPEED 0.005f
 
-static const float MaxVerticalAngle = 85.0f;
-
-static inline float RadiansToDegrees(float radians) {
-    return radians * 180.0f / (float)M_PI;
-}
-
-Camera::Camera() :
-_position(0.0f, 0.0f, 1.0f),
-_horizontalAngle(0.0f),
-_verticalAngle(0.0f),
-_fieldOfView(50.0f),
-_nearPlane(0.01f),
-_farPlane(100.0f),
-_viewportAspectRatio(4.0f/3.0f)
+Camera::Camera()
 {
+    SetViewport(0, 0, 640, 480);
+    SetFOV(0.25f * M_PI);
+    SetClippingPlanes(1.0f, 100.0f);
+
+    position = Point3(0.0f, 0.0f, 10.0f);
+    velocity = Vector3(0.0f, 0.0f, 0.0f);
+
+    forward = -Vector3::zAxis();
+    up = Vector3::yAxis();
+    right = Vector3::xAxis();
+
+    elevation = 0.0f;
+
+    orientation = Quat::identity();
+
+    view = Matrix4::identity();
+    projection = Matrix4::identity();
 }
 
-const glm::vec3& Camera::position() const {
-    return _position;
+Camera::~Camera() {}
+
+void Camera::SetViewport(int x, int y, int width, int height)
+{
+    this->x = x;
+    this->y = y;
+    this->width = width;
+    this->height = height;
+
+    aspect = width / (float)height;
 }
 
-void Camera::setPosition(const glm::vec3 &position) {
-    _position = position;
+void Camera::SetClippingPlanes(float zNear, float zFar)
+{
+    nearPlane = zNear;
+    farPlane = zFar;
 }
 
-void Camera::offsetPositon(const glm::vec3 &offset) {
-    _position += offset;
+void Camera::SetFOV(float fovRadians)
+{
+    fov = fovRadians;
 }
 
-float Camera::fieldOfView() const {
-    return _fieldOfView;
+void Camera::Update(float dt)
+{
+    CaptureMouseState();
+    CaptureKeyboardState();
+
+    position += velocity * dt;
+
+    forward = normalize(rotate(orientation, -Vector3::zAxis()));
+    up = normalize(rotate(orientation, Vector3::yAxis()));
+    right = normalize(rotate(orientation, Vector3::xAxis()));
+
+    view = Matrix4::lookAt(position, position + forward, up);
+    projection = Matrix4::perspective(fov, aspect, nearPlane, farPlane);
+    viewProjection = projection * view;
 }
 
-void Camera::setFieldOfView(float fieldOfView) {
-    assert(fieldOfView > 0.0f && fieldOfView < 180.0f);
-    _fieldOfView = fieldOfView;
+void Camera::CaptureKeyboardState()
+{
+    const Uint8 *keys = SDL_GetKeyboardState(nullptr);
+
+    if (keys[SDL_SCANCODE_W]) {
+        velocity = forward * CAMERA_LINEAR_SPEED;
+    } else if (keys[SDL_SCANCODE_S]) {
+        velocity = -forward * CAMERA_LINEAR_SPEED;
+    } else {
+        velocity = Vector3(0.0f, 0.0f, 0.0f);
+    }
+
+    if (keys[SDL_SCANCODE_A]) {
+        velocity -= right * CAMERA_LINEAR_SPEED;
+    } else if (keys[SDL_SCANCODE_D]) {
+        velocity += right * CAMERA_LINEAR_SPEED;
+    }
+
+    if (keys[SDL_SCANCODE_SPACE]) {
+        velocity -= up * CAMERA_LINEAR_SPEED;
+    }
 }
 
-float Camera::farPlane() const {
-    return _farPlane;
-}
+void Camera::CaptureMouseState()
+{
+    float maxElevation = 0.49f * (float)M_PI;
 
-float Camera::nearPlane() const {
-    return _nearPlane;
-}
+    int dx, dy;
 
-void Camera::setNearAndFarPlanes(float nearPlane, float farPlane) {
-    assert(nearPlane > 0.0f);
-    assert(farPlane  > nearPlane);
-    _nearPlane = nearPlane;
-    _farPlane = farPlane;
-}
+    SDL_GetRelativeMouseState(&dx, &dy);
 
-glm::mat4 Camera::orientation() const {
-    glm::mat4 orientation;
-    orientation = glm::rotate(orientation, _verticalAngle, glm::vec3(1,0,0));
-    orientation = glm::rotate(orientation, _horizontalAngle, glm::vec3(0,1,0));
-    return orientation;
-}
+    float rotationX = dy / (float)height;
+    float rotationY = dx / (float)width;
 
-void Camera::offsetOrientation(float upAngle, float rightAngle) {
-    _horizontalAngle += rightAngle;
-    _verticalAngle += upAngle;
-    normalizeAngles();
-}
+    elevation += rotationX;
 
-void Camera::lookAt(glm::vec3 position) {
-    assert(position != _position);
-    glm::vec3 direction = glm::normalize(position - _position);
-    _verticalAngle = RadiansToDegrees(asinf(-direction.y));
-    _horizontalAngle = -RadiansToDegrees(atan2f(-direction.x, -direction.z));
-    normalizeAngles();
-}
+    if (elevation > maxElevation) {
+        rotationX = maxElevation - (elevation - rotationX);
+        elevation = maxElevation;
+    }
 
-float Camera::viewportAspectRatio() const {
-    return _viewportAspectRatio;
-}
+    if (elevation < -maxElevation) {
+        rotationX = -maxElevation - (elevation - rotationX);
+        elevation = -maxElevation;
+    }
 
-void Camera::setViewportAspectRatio(float viewportAspectRatio) {
-    assert(viewportAspectRatio > 0.0);
-    _viewportAspectRatio = viewportAspectRatio;
-}
+    if (rotationY != 0.0f) {
+        orientation = Quat::rotation(-rotationY, Vector3::yAxis()) * orientation;
+    }
 
-glm::vec3 Camera::forward() const {
-    glm::vec4 forward = glm::inverse(orientation()) * glm::vec4(0,0,-1,1);
-    return glm::vec3(forward);
-}
+    if (rotationX != 0.0f) {
+        orientation = orientation * Quat::rotation(rotationX, Vector3::xAxis());
+    }
 
-glm::vec3 Camera::right() const {
-    glm::vec4 right = glm::inverse(orientation()) * glm::vec4(1,0,0,1);
-    return glm::vec3(right);
-}
-
-glm::vec3 Camera::up() const {
-    glm::vec4 up = glm::inverse(orientation()) * glm::vec4(0,1,0,1);
-    return glm::vec3(up);
-}
-
-glm::mat4 Camera::matrix() const {
-    return projection() * view();
-}
-
-glm::mat4 Camera::projection() const {
-    return glm::perspective(_fieldOfView, _viewportAspectRatio, _nearPlane, _farPlane);
-}
-
-glm::mat4 Camera::view() const {
-    return orientation() * glm::translate(glm::mat4(), -_position);
-}
-
-void Camera::normalizeAngles() {
-    _horizontalAngle = fmodf(_horizontalAngle, 360.0f);
-    if (_horizontalAngle < 0.0f)
-        _horizontalAngle += 360.0f;
-    
-    if(_verticalAngle > MaxVerticalAngle)
-        _verticalAngle = MaxVerticalAngle;
-    else if (_verticalAngle < -MaxVerticalAngle)
-        _verticalAngle = - MaxVerticalAngle;
+    orientation = normalize(orientation);
 }

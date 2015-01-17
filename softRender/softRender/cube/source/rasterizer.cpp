@@ -1,22 +1,7 @@
 #include "camera.h"
 #include <cpuid.h>
+#include <iostream>
 
-//bool CPUHasAVX()
-//{
-//    bool avxSupported = false;
-//
-//    int cpuInfo[4];
-//    __cpuid(cpuInfo, 1);
-//
-//    bool osUsesXSAVE_XRSTORE = cpuInfo[2] & (1 << 27) || false;
-//    bool cpuAVXSuport = cpuInfo[2] & (1 << 28) || false;
-//
-//    if (osUsesXSAVE_XRSTORE && cpuAVXSuport) {
-//        avxSupported = (_xgetbv(_XCR_XFEATURE_ENABLED_MASK) & 0x6) || false;
-//    }
-//
-//    return avxSupported;
-//}
 
 struct Vertex {
     Vector4 position;
@@ -182,9 +167,11 @@ int height = 1080;
 
 bool Init(bool fullscreen)
 {
+    printf("ilInit\n");
     ilInit();
-
+    printf("ilInit success");
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
+        printf("SDL_Init false");
         return false;
 
     uint32_t windowFlags = SDL_WINDOW_SHOWN;
@@ -192,17 +179,21 @@ bool Init(bool fullscreen)
     if (fullscreen)
         windowFlags |= SDL_WINDOW_FULLSCREEN;
 
-    window = SDL_CreateWindow("Software Renderer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, windowFlags);
+    window = SDL_CreateWindow("Software Renderer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
     if (window == nullptr)
+        printf("SDL_window false");
         return false;
     SDL_Surface *surface = SDL_GetWindowSurface(window);
     if (surface == nullptr)
+        printf("SDL_surface false");
         return false;
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
     if (renderer == nullptr)
+        printf("SDL_renderer false");
         return false;
     backBuffer = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, width, height);
     if (backBuffer == nullptr)
+        printf("SDL_surface false");
         return false;
 
     depthBuffer = (float *)malloc(width * height * sizeof(float));
@@ -348,10 +339,6 @@ void Rasterize(Matrix4 &worldMatrix, Geometry *geometries, int numGeometries, Ca
 
 int main(int argc, char **argv)
 {
-//    if (!CPUHasAVX()) {
-//        fprintf(stderr, "CPU without AVX instructions, quitting");
-//        return 1;
-//    }
 
     if (argc < 2) {
         fprintf(stderr, "Usage: %s <mesh_file>", argv[0]);
@@ -359,6 +346,7 @@ int main(int argc, char **argv)
     }
 
     if (!Init(false))
+        std::cout << "Init Error"<< std::endl;
         return 1;
 
     Camera camera;
@@ -374,8 +362,11 @@ int main(int argc, char **argv)
 
     float rotation = 0.0f;
 
-    for (;;) {
-        SDL_PumpEvents();
+    SDL_Event *event;
+    bool quit = false;
+
+      while (!quit) {
+        //SDL_PumpEvents();
 
         if (SDL_GetKeyboardState(nullptr)[SDL_SCANCODE_ESCAPE])
             break;

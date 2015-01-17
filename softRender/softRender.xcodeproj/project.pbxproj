@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E21429F21A6A813E004B0CE7 /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F22F571A6A5FB800DC8A1D /* libassimp.a */; };
 		E24418571A66B2BA00EC71A5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E24418561A66B2BA00EC71A5 /* main.cpp */; };
 		E244185F1A66B2DE00EC71A5 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185D1A66B2DE00EC71A5 /* SDL2_image.framework */; };
 		E24418601A66B2DE00EC71A5 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185E1A66B2DE00EC71A5 /* SDL2.framework */; };
@@ -18,8 +19,11 @@
 		E2F22F4E1A6A3D8C00DC8A1D /* camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F22E6F1A6A3D8C00DC8A1D /* camera.cpp */; };
 		E2F22F4F1A6A3D8C00DC8A1D /* precompiled.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F22E711A6A3D8C00DC8A1D /* precompiled.cpp */; };
 		E2F22F501A6A3D8C00DC8A1D /* rasterizer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F22E731A6A3D8C00DC8A1D /* rasterizer.cpp */; };
-		E2F22F531A6A467C00DC8A1D /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185E1A66B2DE00EC71A5 /* SDL2.framework */; };
 		E2F22F561A6A52E300DC8A1D /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E2F22F541A6A52E300DC8A1D /* Camera.cpp */; };
+		E2F22F5E1A6A64D500DC8A1D /* libIL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F22F5D1A6A64D500DC8A1D /* libIL.a */; };
+		E2F22F631A6A735D00DC8A1D /* libIL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F22F5D1A6A64D500DC8A1D /* libIL.a */; };
+		E2F22F661A6A784B00DC8A1D /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E2F22F641A6A766600DC8A1D /* libpng16.a */; };
+		E2F22F691A6A7D4400DC8A1D /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E244185E1A66B2DE00EC71A5 /* SDL2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -269,6 +273,11 @@
 		E2F22F511A6A3DC000DC8A1D /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = ../../../../../Library/Frameworks/SDL.framework; sourceTree = "<group>"; };
 		E2F22F541A6A52E300DC8A1D /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		E2F22F551A6A52E300DC8A1D /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		E2F22F571A6A5FB800DC8A1D /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = softRender/cube/source/libassimp.a; sourceTree = "<group>"; };
+		E2F22F591A6A630800DC8A1D /* libassimp.3.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.1.1.dylib; path = ../../../../../usr/local/Cellar/assimp/3.1.1/lib/libassimp.3.1.1.dylib; sourceTree = "<group>"; };
+		E2F22F5D1A6A64D500DC8A1D /* libIL.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIL.a; path = ../../../../../usr/local/Cellar/devil/1.7.8_1/lib/libIL.a; sourceTree = "<group>"; };
+		E2F22F5F1A6A72AE00DC8A1D /* libpng16.16.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpng16.16.dylib; path = ../../../../../usr/local/Cellar/libpng/1.6.15/lib/libpng16.16.dylib; sourceTree = "<group>"; };
+		E2F22F641A6A766600DC8A1D /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = ../../../../../usr/local/Cellar/libpng/1.6.15/lib/libpng16.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +285,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2F22F5E1A6A64D500DC8A1D /* libIL.a in Frameworks */,
 				E244185F1A66B2DE00EC71A5 /* SDL2_image.framework in Frameworks */,
 				E24418601A66B2DE00EC71A5 /* SDL2.framework in Frameworks */,
 			);
@@ -285,7 +295,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2F22F531A6A467C00DC8A1D /* SDL2.framework in Frameworks */,
+				E21429F21A6A813E004B0CE7 /* libassimp.a in Frameworks */,
+				E2F22F661A6A784B00DC8A1D /* libpng16.a in Frameworks */,
+				E2F22F691A6A7D4400DC8A1D /* SDL2.framework in Frameworks */,
+				E2F22F631A6A735D00DC8A1D /* libIL.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +308,11 @@
 		E244184A1A66B2BA00EC71A5 = {
 			isa = PBXGroup;
 			children = (
+				E2F22F641A6A766600DC8A1D /* libpng16.a */,
+				E2F22F5F1A6A72AE00DC8A1D /* libpng16.16.dylib */,
+				E2F22F5D1A6A64D500DC8A1D /* libIL.a */,
+				E2F22F591A6A630800DC8A1D /* libassimp.3.1.1.dylib */,
+				E2F22F571A6A5FB800DC8A1D /* libassimp.a */,
 				E2F22F511A6A3DC000DC8A1D /* SDL.framework */,
 				E244185D1A66B2DE00EC71A5 /* SDL2_image.framework */,
 				E244185E1A66B2DE00EC71A5 /* SDL2.framework */,
@@ -894,9 +912,14 @@
 		E244185B1A66B2BA00EC71A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/devil/1.7.8_1/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -905,9 +928,14 @@
 		E244185C1A66B2BA00EC71A5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/devil/1.7.8_1/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -916,6 +944,7 @@
 		E2F22E681A6A3D3500DC8A1D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
@@ -929,6 +958,14 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"/Users/pengfei/github/SoftRasterizer/softRender/softRender/cube/third-party/include/**",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/softRender/cube/source",
+					/usr/local/Cellar/devil/1.7.8_1/lib,
+					/usr/local/Cellar/libpng/1.6.15/lib,
+					/usr/local/Cellar/assimp/3.1.1/lib,
+				);
+				MACH_O_TYPE = mh_execute;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -936,6 +973,7 @@
 		E2F22E691A6A3D3500DC8A1D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
@@ -945,6 +983,14 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"/Users/pengfei/github/SoftRasterizer/softRender/softRender/cube/third-party/include/**",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/softRender/cube/source",
+					/usr/local/Cellar/devil/1.7.8_1/lib,
+					/usr/local/Cellar/libpng/1.6.15/lib,
+					/usr/local/Cellar/assimp/3.1.1/lib,
+				);
+				MACH_O_TYPE = mh_execute;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -977,6 +1023,7 @@
 				E2F22E691A6A3D3500DC8A1D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
